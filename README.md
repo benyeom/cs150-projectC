@@ -10,18 +10,20 @@ Professor Mike Ryu (mryu@westmont.edu)
 * **Email**: syeom@westmont.edu
 
 
-## Thesis:
+## Region:
+My data dashboard provides an insightful analysis of the current economic landscape of the housing market in Santa Barbara County. Designed for individuals navigating major life transitions—such as graduating, job searching, or relocating—this tool offers valuable data to help users assess housing affordability and make informed decisions about living in Santa Barbara.
 
+## Datasets:
 
-## Context:
-**Who**: 
-
-**What**:
-
-**How**:
 
 ## Data: 
+**CSV File in Root Directory**: 
+* assets/Occupational employment and wages by major occupational group.csv
+* assets/Median Earnings by Industry.csv
 
+**CSV File Used for Data Visualization**: 
+* https://www.bls.gov/regions/west/news-release/occupationalemploymentandwages_santabarbara.htm#TableA
+* https://datausa.io/profile/geo/santa-barbara-ca/?monthly-employment=latestEmploymentValue
 
 ## Strategies Used: 
 * Employed white space in both my Plotly dash and presentation. 
