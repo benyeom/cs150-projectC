@@ -14,7 +14,11 @@ Professor Mike Ryu (mryu@westmont.edu)
 My data dashboard provides an insightful analysis of the current economic landscape of the housing market in Santa Barbara County. Designed for individuals navigating major life transitions—such as graduating, job searching, or relocating—this tool offers valuable data to help users assess housing affordability and make informed decisions about living in Santa Barbara.
 
 ## Datasets:
+The first dataset provides insights into the distribution of jobs in Santa Barbara by industry, along with their associated wages. This data helps analyze which industries dominate the local job market and how wages vary across sectors.
 
+The second dataset tracks the progression of median earnings over time, segmented by industry and gender. This dataset is crucial for understanding wage trends, gender disparities, and how an individual's earnings compare to industry averages.
+
+Both datasets were selected to offer a comprehensive view of employment patterns, wage distribution, and income inequality in Santa Barbara, facilitating a deeper analysis of economic trends and workforce dynamics.
 
 ## Data: 
 **CSV File in Root Directory**: 
