@@ -228,7 +228,7 @@ app.layout = dbc.Container(
         ),
         dbc.Row(
             [
-                dbc.Col(tabs, width=8, lg=7, className="mt-4 border"),
+                dbc.Col(tabs, width=8, lg=6, className="mt-4 border"),
                 dbc.Col(
                     dcc.Graph(
                         id="wage-bar-chart",
@@ -256,8 +256,7 @@ Callbacks
 """
 # ========= Callback to handle assessment logic and update both charts
 @app.callback(
-    [Output("assessment-result", "children"),
-     Output("wage-bar-chart", "figure"),
+    [Output("wage-bar-chart", "figure"),
      Output("earnings-column-chart", "figure")],
     Input("assess-button", "n_clicks"),
     State("current-hourly-wage", "value"),
@@ -267,36 +266,16 @@ Callbacks
 def assess_fit_and_create_chart(n_clicks, hourly_wage, cost_of_living, occupation):
     if n_clicks > 0 and hourly_wage is not None and occupation is not None:
         try:
-            # Convert inputs to float
             hourly_wage = float(hourly_wage)
-            cost_of_living = float(cost_of_living) if cost_of_living is not None else 9667
-
-            # Get the mean hourly wage for the selected occupation
             occupation_data = df[df["Major occupational group"] == occupation]
             if not occupation_data.empty:
                 mean_hourly_wage = float(occupation_data["Unnamed: 4"].values[0])
 
-                # Monthly wage calculation
-                wage_times_160 = hourly_wage * 160
-
-                if wage_times_160 < cost_of_living:
-                    assessment_result = "You may not be a good fit for Santa Barbara."
-                elif hourly_wage > mean_hourly_wage:
-                    assessment_result = "You are a great fit for Santa Barbara!"
-                else:
-                    assessment_result = f"You may be a good fit but consider all your options! You are making less than the average {occupation} professional."
-
-                assessment_result = html.Div(
-                    assessment_result,
-                    style={"fontSize": "24px", "fontWeight": "bold"}  # Change the font size here
-                )
-
-                # Create bar chart for wage comparison
                 wage_figure = {
                     "data": [
                         go.Bar(x=["Your Wage", "Average Wage"],
                                y=[hourly_wage, mean_hourly_wage],
-                               marker=dict(color=["blue", "green"])),
+                               marker=dict(color=["#87CEFA", "#90EE90"])),
                     ],
                     "layout": go.Layout(
                         title=f"Hourly Wage Comparison: {occupation}",
@@ -306,26 +285,22 @@ def assess_fit_and_create_chart(n_clicks, hourly_wage, cost_of_living, occupatio
                     ),
                 }
 
-                # Convert hourly wage to annual salary
                 annual_salary = hourly_wage * 2080
-
-                # Create earnings column chart with "Your Annual Salary"
                 fig = go.Figure()
-
-                # Add industry earnings data
                 fig.add_trace(go.Bar(
                     x=df_avg_earnings["Median Earnings"],
                     y=df_avg_earnings["Industry"],
                     orientation="h",
-                    marker=dict(color="blue")
+                    marker=dict(color="#87CEFA"),
+                    name="Industry Median Earnings"
                 ))
 
-                # Add "Your Annual Salary" to the column chart
                 fig.add_trace(go.Bar(
                     x=[annual_salary],
                     y=["Your Annual Salary"],
                     orientation="h",
-                    marker=dict(color="red")
+                    marker=dict(color="#FF6347"),
+                    name="Your Annual Salary"
                 ))
 
                 fig.update_layout(
@@ -333,12 +308,10 @@ def assess_fit_and_create_chart(n_clicks, hourly_wage, cost_of_living, occupatio
                     xaxis_title="<b>Earnings ($)</b>",
                     yaxis_title="<b>Industry</b>",
                 )
-
-                return assessment_result, wage_figure, fig
+                return wage_figure, fig
         except ValueError:
-            return "Please enter valid numerical values for hourly wage and cost of living.", {}, {}
-    return "", {}, {}
-
+            return {}, {}
+    return {}, {}
 
 if __name__ == "__main__":
     app.run(debug=True)
