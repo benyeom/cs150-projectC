@@ -35,4 +35,9 @@ Both datasets were selected to offer a comprehensive view of employment patterns
 * Visuals are not stretched to take up the available space; instead, appropriately sized to my content. 	
 * The only thing on the page; a single sentence or even a single number. 
 * All text in the visual is the same size except where decisions were made to further emphasize or de‐emphasize components. 
-* The graph title is larger. 
+* The graph title is larger.
+
+## Feedback Implementation
+* Centered the columns in the first row (tabs and bar chart)
+* Rename the texts in the legend of the column chart
+* Change color scheme to be more appealing (lighter colors)
